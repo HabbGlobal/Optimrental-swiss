@@ -74,7 +74,7 @@ const getEmailTemplate = (title: string, content: string, details: any) => `
             <p class="footer-text">
                 © ${new Date().getFullYear()} Optimrental Switzerland. All rights reserved.<br>
                 Zürich • Basel • Geneva • Bern • Lugano • St. Moritz<br>
-                <a href="https://optimrental.ch" class="link">optimrental.ch</a> | <a href="https://www.habb.uk" class="link">Developed by HABB</a>
+                <a href="https://optimrental.ch" class="link">optimrental.ch</a> | <a href="https://www.habb.lk" class="link">Developed by HABB PVT LTD</a>
             </p>
         </div>
     </div>
