@@ -245,25 +245,41 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
                     </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div className="flex flex-col md:flex-row items-center gap-4">
+                {/* Developer Credit — HABB PVT LTD */}
+                <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+
+                        {/* Copyright */}
                         <div className="text-slate-500 text-[10px] font-black uppercase tracking-widest">
                             © {new Date().getFullYear()} Optimrental Switzerland. All rights reserved.
                         </div>
-                        <div className="hidden md:block w-1 h-1 bg-slate-700 rounded-full" />
+
+                        {/* Developed By — compact inline pill */}
                         <a
-                            href="https://www.habb.uk"
+                            href="https://www.habb.lk"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-slate-600 text-[10px] font-black uppercase tracking-widest hover:text-amber-500 transition-colors"
+                            className="group inline-flex items-center gap-2.5 bg-white/5 hover:bg-amber-500/10 border border-white/10 hover:border-amber-500/40 px-4 py-2 rounded-full transition-all duration-300 hover:scale-105"
                         >
-                            Developed by HABB
+                            {/* Dot icon */}
+                            <span className="w-2 h-2 rounded-full bg-amber-500 group-hover:bg-amber-400 transition-colors shrink-0" />
+                            <span className="text-slate-400 text-xs font-semibold group-hover:text-slate-300 transition-colors whitespace-nowrap">
+                                Developed by
+                            </span>
+                            <span className="text-white text-xs font-black tracking-wide group-hover:text-amber-400 transition-colors whitespace-nowrap">
+                                HABB PVT LTD
+                            </span>
+                            <span className="text-slate-500 text-[10px] group-hover:text-amber-500 transition-colors whitespace-nowrap">
+                                www.habb.lk
+                            </span>
                         </a>
-                    </div>
-                    <div className="flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                        <a href="#" className="hover:text-amber-500 transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-amber-500 transition-colors">Terms of Service</a>
-                        <a href="#" className="hover:text-amber-500 transition-colors">Impressum</a>
+
+                        {/* Legal Links */}
+                        <div className="flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                            <a href="#" className="hover:text-amber-500 transition-colors">Privacy Policy</a>
+                            <a href="#" className="hover:text-amber-500 transition-colors">Terms of Service</a>
+                            <a href="#" className="hover:text-amber-500 transition-colors">Impressum</a>
+                        </div>
                     </div>
                 </div>
             </footer>
