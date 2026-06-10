@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Vehicle } from '@/types';
 import { Card, CardContent } from '@/components/ui/card';
@@ -20,11 +20,33 @@ const NATIONALITIES = [
     'Switzerland', 'Germany', 'France', 'Italy', 'Austria', 'United Kingdom', 'USA', 'Canada', 'Other'
 ];
 
-export default function BookingForm({ vehicles, locale }: { vehicles: Vehicle[], locale: string }) {
+export default function BookingForm({
+    vehicles,
+    locale,
+    preselectedVehicle,
+    onPreselectedConsumed,
+}: {
+    vehicles: Vehicle[];
+    locale: string;
+    preselectedVehicle?: Vehicle | null;
+    onPreselectedConsumed?: () => void;
+}) {
     const t = useTranslations('Booking');
     const router = useRouter();
 
     const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
+    const bookingFormRef = useRef<HTMLDivElement>(null);
+
+    // Sync external preselection (from FleetShowcase)
+    useEffect(() => {
+        if (preselectedVehicle) {
+            setSelectedVehicle(preselectedVehicle);
+            onPreselectedConsumed?.();
+            setTimeout(() => {
+                bookingFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 50);
+        }
+    }, [preselectedVehicle]);
     const [date, setDate] = useState<Date | undefined>(new Date());
     const [days, setDays] = useState<number>(1);
     const [name, setName] = useState('');
@@ -104,7 +126,12 @@ export default function BookingForm({ vehicles, locale }: { vehicles: Vehicle[],
                 {vehicles.map((v) => (
                     <div key={v.id} className="w-full max-w-[380px]">
                         <div
-                            onClick={() => setSelectedVehicle(v)}
+                            onClick={() => {
+                                setSelectedVehicle(v);
+                                setTimeout(() => {
+                                    bookingFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }, 50);
+                            }}
                             className={cn(
                                 "cursor-pointer transition-all duration-300 rounded-3xl overflow-hidden border-2",
                                 selectedVehicle?.id === v.id ? "border-amber-500 ring-4 ring-amber-500/10" : "border-transparent bg-white shadow-md hover:shadow-xl"
@@ -137,6 +164,7 @@ export default function BookingForm({ vehicles, locale }: { vehicles: Vehicle[],
             </div>
 
             {/* Booking Details */}
+            <div ref={bookingFormRef} className="scroll-mt-32">
             <Card className="rounded-3xl border-none shadow-2xl bg-white overflow-hidden">
                 <div className="bg-slate-900 px-8 py-6 text-white flex justify-between items-center">
                     <h2 className="text-xl font-bold flex items-center gap-2"><Clock /> Booking Details</h2>
@@ -261,6 +289,7 @@ export default function BookingForm({ vehicles, locale }: { vehicles: Vehicle[],
                     </Button>
                 </div>
             </Card>
+            </div>
         </form>
     );
 }

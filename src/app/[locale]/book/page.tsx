@@ -1,9 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import { supabase } from '@/lib/supabase';
-import { Vehicle } from '@/types';
-import BookingForm from '@/components/BookingForm';
 import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 import { Car } from 'lucide-react';
+import BookPageClient from './BookPageClient';
 
 export default async function BookPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
@@ -33,9 +33,11 @@ export default async function BookPage({ params }: { params: Promise<{ locale: s
                         <div className="h-1.5 w-20 bg-amber-500 mx-auto rounded-full mt-6" />
                     </div>
 
-                    <BookingForm vehicles={vehicles || []} locale={locale} />
+                    <BookPageClient vehicles={vehicles || []} locale={locale} />
                 </div>
             </div>
+            <Footer />
         </main>
     );
 }
+
